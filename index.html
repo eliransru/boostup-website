@@ -4,152 +4,417 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BoostUp - סוכנות דיגיטל מרקטינג</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { 
-      margin: 0; 
-      font-family: system-ui, -apple-system, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
       background: #000;
       color: #fff;
+      overflow-x: hidden;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    /* Animated Background */
+    .bg-animated {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
-    .fade-in { animation: fadeIn 0.6s ease-in; }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Title Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(20, 184, 166, 0.8), 0 0 30px rgba(249, 115, 22, 0.4);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-slide-down {
+      animation: slideDown 0.8s ease-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .animate-glow {
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+    }
+
+    /* Premium Card */
+    .premium-card {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(249, 115, 22, 0.02) 100%);
+      border: 1px solid rgba(20, 184, 166, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .premium-card:hover {
+      border-color: rgba(20, 184, 166, 0.5);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(20, 184, 166, 0.1);
+    }
+
+    .premium-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Button */
+    .btn-primary {
+      position: relative;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+      border: 2px solid #14b8a6;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s;
+      text-transform: none;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+      transition: left 0.4s;
+      z-index: -1;
+    }
+
+    .btn-primary:hover {
+      border-color: #f97316;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+    }
+
+    .btn-primary:hover::before {
+      left: 0;
+    }
+
+    /* Nav Bar */
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+    }
+
+    /* Service Icons */
+    .service-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      transition: transform 0.4s;
+    }
+
+    .premium-card:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Blog Card */
+    .blog-card {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.03) 0%, rgba(249, 115, 22, 0.02) 100%);
+      border: 1px solid rgba(20, 184, 166, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.4s;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(249, 115, 22, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(249, 115, 22, 0.1);
+    }
+
+    /* Form Styling */
+    input, textarea {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1.5px solid rgba(20, 184, 166, 0.3) !important;
+      color: white !important;
+      border-radius: 12px !important;
+      transition: all 0.3s !important;
+      font-family: 'Heebo', sans-serif !important;
+      font-size: 1rem !important;
+    }
+
+    input:focus, textarea:focus {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(20, 184, 166, 0.8) !important;
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.2) !important;
+      outline: none !important;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* Large Heading */
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -1.5px;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(20, 184, 166, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .premium-card {
+        padding: 1.5rem;
+      }
+
+      .service-icon {
+        font-size: 2.5rem;
+      }
+    }
   </style>
 </head>
-<body class="bg-black text-white">
+<body>
 
-  <!-- Nav -->
-  <nav class="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-md border-b border-teal-500/20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
-          <span class="text-white font-bold text-sm">↗</span>
+  <div class="bg-animated"></div>
+
+  <div class="content-wrapper">
+    <!-- Nav -->
+    <nav class="fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center animate-float">
+            <span class="text-white font-black text-lg">↗</span>
+          </div>
+          <span class="font-black text-2xl hidden sm:block bg-gradient-text">BoostUp</span>
         </div>
-        <span class="font-bold text-xl hidden sm:block">BoostUp</span>
+        <div class="hidden md:flex gap-12">
+          <a href="#home" class="text-sm font-bold text-gray-300 hover:text-teal-400 transition">Home</a>
+          <a href="#services" class="text-sm font-bold text-gray-300 hover:text-teal-400 transition">Services</a>
+          <a href="#blog" class="text-sm font-bold text-gray-300 hover:text-teal-400 transition">Blog</a>
+          <a href="#about" class="text-sm font-bold text-gray-300 hover:text-teal-400 transition">About</a>
+          <a href="#contact" class="text-sm font-bold text-gray-300 hover:text-teal-400 transition">Contact</a>
+        </div>
       </div>
-      <div class="hidden md:flex gap-8">
-        <a href="#home" class="text-sm font-medium text-gray-300 hover:text-teal-400">Home</a>
-        <a href="#services" class="text-sm font-medium text-gray-300 hover:text-teal-400">Services</a>
-        <a href="#blog" class="text-sm font-medium text-gray-300 hover:text-teal-400">Blog</a>
-        <a href="#about" class="text-sm font-medium text-gray-300 hover:text-teal-400">About</a>
-        <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-teal-400">Contact</a>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero -->
-  <section id="home" class="pt-32 pb-20 px-4 text-center fade-in">
-    <div class="max-w-4xl mx-auto">
-      <div class="px-4 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full text-teal-400 text-sm font-medium w-fit mx-auto mb-6">
-        🚀 Digital Marketing Agency
-      </div>
-      <h1 class="text-5xl sm:text-6xl font-bold mb-6">
-        הגדל את העסק שלך <span class="bg-gradient-to-r from-teal-400 to-orange-400 bg-clip-text text-transparent">דיגיטלית</span>
-      </h1>
-      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-        BoostUp היא סוכנות דיגיטל מרקטינג שמתמחה בהצמיח עסקים בישראל.
-      </p>
-      <button class="px-8 py-3 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg font-semibold hover:from-teal-600 hover:to-teal-700 transition">
-        התחל קמפיין →
-      </button>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="py-20 px-4 bg-white/5">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12 text-center">מה אנחנו עושים</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Hero -->
+    <section id="home" class="pt-40 pb-32 px-4 text-center">
+      <div class="max-w-5xl mx-auto">
+        <div class="px-6 py-2 bg-teal-500/10 border border-teal-500/40 rounded-full text-teal-300 text-sm font-bold w-fit mx-auto mb-8 animate-slide-down inline-block">
+          🚀 Digital Marketing Agency
+        </div>
         
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-teal-500/50 transition">
-          <div class="text-4xl mb-4">📱</div>
-          <h3 class="text-xl font-bold mb-2">Social Media Marketing</h3>
-          <p class="text-gray-400">קמפיינים ממומנים בפייסבוק, אינסטגרם וטיקטוק</p>
-        </div>
+        <h1 class="mb-8 animate-slide-down">
+          הגדל את העסק שלך <span class="gradient-text">דיגיטלית</span>
+        </h1>
 
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-teal-500/50 transition">
-          <div class="text-4xl mb-4">📊</div>
-          <h3 class="text-xl font-bold mb-2">ניהול קמפיינים</h3>
-          <p class="text-gray-400">ניהול תקציבים וניתוח ROI בזמן אמת</p>
-        </div>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed animate-slide-up">
+          BoostUp היא סוכנות דיגיטל מרקטינג שמתמחה בהצמיח עסקים בישראל. קמפיינים ממומנים, תוכן איכותי ו-SEO.
+        </p>
 
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-teal-500/50 transition">
-          <div class="text-4xl mb-4">🎬</div>
-          <h3 class="text-xl font-bold mb-2">ייצור תוכן</h3>
-          <p class="text-gray-400">וידאו, גרפיקה וקופי שמוכר</p>
-        </div>
-
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-teal-500/50 transition">
-          <div class="text-4xl mb-4">🔍</div>
-          <h3 class="text-xl font-bold mb-2">SEO & SEM</h3>
-          <p class="text-gray-400">קידום אתרים אורגני וממומן בגוגל</p>
-        </div>
+        <button class="btn-primary animate-slide-up">
+          התחל קמפיין →
+        </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Blog -->
-  <section id="blog" class="py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12 text-center">מהבלוג שלנו</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Services -->
+    <section id="services" class="py-32 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="section-title mb-20 text-center">מה אנחנו עושים</h2>
         
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition">
-          <div class="text-4xl mb-4">📝</div>
-          <h3 class="text-lg font-bold mb-3">כיצד להפעיל קמפיין מוצלח ברשתות חברתיות</h3>
-          <p class="text-sm text-gray-500">מרץ 12, 2026 • 5 דק קריאה</p>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="premium-card">
+            <div class="service-icon">📱</div>
+            <h3 class="text-2xl font-black mb-4">Social Media</h3>
+            <p class="text-gray-400 text-lg leading-relaxed">קמפיינים ממומנים בפייסבוק, אינסטגרם וטיקטוק שמביאים תוצאות</p>
+          </div>
 
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition">
-          <div class="text-4xl mb-4">📊</div>
-          <h3 class="text-lg font-bold mb-3">ROI בשיווק דיגיטלי - איך למדוד הכל</h3>
-          <p class="text-sm text-gray-500">מרץ 5, 2026 • 7 דק קריאה</p>
-        </div>
+          <div class="premium-card">
+            <div class="service-icon">📊</div>
+            <h3 class="text-2xl font-black mb-4">ניהול קמפיינים</h3>
+            <p class="text-gray-400 text-lg leading-relaxed">ניהול תקציבים מקצועי וניתוח ROI בזמן אמת</p>
+          </div>
 
-        <div class="p-6 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition">
-          <div class="text-4xl mb-4">💰</div>
-          <h3 class="text-lg font-bold mb-3">עלייה בעלויות פרסום? הנה הפתרון</h3>
-          <p class="text-sm text-gray-500">פברואר 28, 2026 • 6 דק קריאה</p>
+          <div class="premium-card">
+            <div class="service-icon">🎬</div>
+            <h3 class="text-2xl font-black mb-4">ייצור תוכן</h3>
+            <p class="text-gray-400 text-lg leading-relaxed">וידאו, גרפיקה וקופי שמוכר לגדול</p>
+          </div>
+
+          <div class="premium-card">
+            <div class="service-icon">🔍</div>
+            <h3 class="text-2xl font-black mb-4">SEO & SEM</h3>
+            <p class="text-gray-400 text-lg leading-relaxed">קידום אתרים אורגני וממומן בגוגל</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About -->
-  <section id="about" class="py-20 px-4 bg-white/5">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6">אודותינו</h2>
-      <p class="text-lg text-gray-400">
-        BoostUp הוקמה על ידי אלירן סרוגו, בעל ניסיון יותר מ-10 שנים בשיווק דיגיטלי בישראל. 
-        אנחנו מתמחים בהצמיח עסקים באמצעות קמפיינים ממומנים, תוכן איכותי ו-SEO.
-      </p>
-    </div>
-  </section>
+    <!-- Blog -->
+    <section id="blog" class="py-32 px-4 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="section-title mb-20 text-center">מהבלוג שלנו</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="blog-card">
+            <div class="text-4xl mb-6">📝</div>
+            <h3 class="text-xl font-black mb-4">כיצד להפעיל קמפיין מוצלח</h3>
+            <p class="text-gray-500 text-sm">מרץ 12, 2026 • 5 דק קריאה</p>
+          </div>
 
-  <!-- Contact -->
-  <section id="contact" class="py-20 px-4">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12 text-center">בואו נדבר</h2>
-      <div class="bg-gradient-to-br from-teal-500/10 to-orange-500/10 border border-teal-500/30 rounded-xl p-8">
-        <form class="space-y-4">
-          <input type="text" placeholder="שם" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500" />
-          <input type="email" placeholder="אימייל" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500" />
-          <textarea placeholder="הודעה" rows="4" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500"></textarea>
-          <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg font-semibold hover:from-teal-600 hover:to-teal-700 transition">
-            שלח הודעה
-          </button>
-        </form>
+          <div class="blog-card">
+            <div class="text-4xl mb-6">📊</div>
+            <h3 class="text-xl font-black mb-4">ROI בשיווק דיגיטלי</h3>
+            <p class="text-gray-500 text-sm">מרץ 5, 2026 • 7 דק קריאה</p>
+          </div>
+
+          <div class="blog-card">
+            <div class="text-4xl mb-6">💰</div>
+            <h3 class="text-xl font-black mb-4">עלייה בעלויות פרסום</h3>
+            <p class="text-gray-500 text-sm">פברואר 28, 2026 • 6 דק קריאה</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/10 bg-black/50 py-8 text-center">
-    <p class="text-gray-500">© 2026 BoostUp. כל הזכויות שמורות.</p>
-  </footer>
+    <!-- About -->
+    <section id="about" class="py-32 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="section-title mb-10">אודותינו</h2>
+        <p class="text-xl text-gray-400 leading-relaxed">
+          BoostUp הוקמה על ידי <span class="text-teal-400 font-bold">אלירן סרוגו</span>, בעל ניסיון יותר מ-10 שנים בשיווק דיגיטלי בישראל. 
+          אנחנו מתמחים בהצמיח עסקים באמצעות קמפיינים ממומנים, תוכן איכותי ו-SEO מקצועי.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-32 px-4">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="section-title mb-16 text-center">בואו נדבר</h2>
+        
+        <div class="bg-gradient-to-br from-teal-500/10 to-orange-500/10 border border-teal-500/30 rounded-3xl p-10">
+          <form class="space-y-6">
+            <input type="text" placeholder="שם" class="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white" />
+            <input type="email" placeholder="אימייל" class="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white" />
+            <textarea placeholder="הודעה" rows="5" class="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white resize-none"></textarea>
+            <button type="submit" class="w-full btn-primary">
+              שלח הודעה
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 text-center">
+      <p class="text-gray-500 text-sm">© 2026 BoostUp. כל הזכויות שמורות.</p>
+    </footer>
+  </div>
 
 </body>
 </html>

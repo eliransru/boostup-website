@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BoostUp - Digital Marketing</title>
+  <title>BoostUp - סוכנות דיגיטל מרקטינג</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     * {
@@ -19,7 +19,7 @@
     body {
       font-family: 'Heebo', sans-serif;
       background: #0a0a0a;
-      color: #000;
+      color: #fff;
       line-height: 1.6;
     }
 
@@ -43,7 +43,10 @@
     .logo {
       font-size: 20px;
       font-weight: 900;
-      color: #000;
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       letter-spacing: -1px;
     }
 
@@ -63,12 +66,12 @@
     }
 
     .nav-links a:hover {
-      color: #ff4444;
+      color: #14b8a6;
     }
 
     .contact-btn {
       padding: 10px 30px;
-      background: #ff4444;
+      background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
       color: white;
       border: none;
       border-radius: 30px;
@@ -80,8 +83,9 @@
     }
 
     .contact-btn:hover {
-      background: #ff2222;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
       transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
     }
 
     @media (max-width: 768px) {
@@ -99,9 +103,9 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       padding: 150px 80px;
-      background: #fff;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1f3a 50%, #0a0a0a 100%);
       position: relative;
       overflow: hidden;
     }
@@ -113,12 +117,23 @@
       right: -20%;
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(255, 68, 68, 0.03) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
       border-radius: 50%;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 600px;
       z-index: 2;
     }
 
@@ -126,33 +141,36 @@
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #999;
+      color: #14b8a6;
       margin-bottom: 30px;
       font-weight: 600;
     }
 
     .hero h1 {
-      font-size: 6rem;
+      font-size: 5.5rem;
       font-weight: 900;
-      line-height: 1;
+      line-height: 1.1;
       margin-bottom: 30px;
       letter-spacing: -2px;
     }
 
     .hero-line-1 {
       display: block;
-      color: #000;
+      color: #fff;
     }
 
     .hero-line-2 {
       display: block;
-      color: #ff4444;
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       font-style: italic;
     }
 
     .hero p {
       font-size: 1.1rem;
-      color: #666;
+      color: rgba(255, 255, 255, 0.7);
       line-height: 1.8;
       margin-bottom: 50px;
       max-width: 600px;
@@ -161,7 +179,7 @@
     .cta-button {
       display: inline-block;
       padding: 16px 45px;
-      background: #ff4444;
+      background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
       color: white;
       border: none;
       border-radius: 50px;
@@ -171,16 +189,57 @@
       transition: all 0.4s;
       text-transform: uppercase;
       letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      transition: left 0.4s;
+      z-index: -1;
     }
 
     .cta-button:hover {
-      background: #ff2222;
       transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(255, 68, 68, 0.3);
+      box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+    }
+
+    .cta-button:hover::before {
+      left: 0;
+    }
+
+    .hero-image {
+      width: 400px;
+      height: 500px;
+      z-index: 3;
+      position: relative;
+      perspective: 1200px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(20, 184, 166, 0.25);
+      transform: rotateY(-5deg) rotateX(3deg);
+      animation: float-image 3s ease-in-out infinite;
+    }
+
+    @keyframes float-image {
+      0%, 100% { transform: rotateY(-5deg) rotateX(3deg) translateY(0); }
+      50% { transform: rotateY(-5deg) rotateX(3deg) translateY(-20px); }
     }
 
     @media (max-width: 768px) {
       .hero {
+        flex-direction: column;
         padding: 120px 40px;
       }
       .hero h1 {
@@ -189,6 +248,11 @@
       .hero p {
         font-size: 1rem;
       }
+      .hero-image {
+        width: 250px;
+        height: 350px;
+        margin-top: 40px;
+      }
     }
 
     /* Services Section */
@@ -196,6 +260,7 @@
       padding: 150px 80px;
       background: #fff;
       position: relative;
+      z-index: 2;
     }
 
     .section-title {
@@ -219,14 +284,27 @@
       display: flex;
       gap: 40px;
       align-items: flex-start;
+      perspective: 1000px;
     }
 
     .service-number {
       font-size: 3.5rem;
       font-weight: 900;
-      color: #ff4444;
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       min-width: 80px;
       line-height: 1;
+    }
+
+    .service-content {
+      transform-style: preserve-3d;
+      transition: transform 0.4s;
+    }
+
+    .service-item:hover .service-content {
+      transform: translateZ(20px) rotateX(5deg);
     }
 
     .service-content h3 {
@@ -266,20 +344,25 @@
     /* Testimonials Section */
     .testimonials {
       padding: 150px 80px;
-      background: #f5f5f5;
+      background: #0a0a0a;
+      position: relative;
+      z-index: 2;
     }
 
     .testimonial-quote {
       font-size: 3rem;
       font-weight: 900;
-      color: #ffcccc;
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 30px;
     }
 
     .testimonial-text {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #000;
+      color: #fff;
       line-height: 1.6;
       margin-bottom: 40px;
       font-style: italic;
@@ -288,7 +371,7 @@
 
     .testimonial-author {
       font-weight: 700;
-      color: #000;
+      color: #fff;
       margin-bottom: 5px;
     }
 
@@ -307,14 +390,15 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: #ddd;
+      background: #333;
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .dot.active {
-      background: #ff4444;
-      transform: scale(1.2);
+      background: #14b8a6;
+      transform: scale(1.3);
+      box-shadow: 0 0 15px rgba(20, 184, 166, 0.5);
     }
 
     @media (max-width: 768px) {
@@ -326,11 +410,51 @@
       }
     }
 
+    /* About Section */
+    .about {
+      padding: 150px 80px;
+      background: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-text {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.9;
+      margin-bottom: 40px;
+    }
+
+    .about-highlight {
+      background: linear-gradient(135deg, #14b8a6 0%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+    }
+
+    @media (max-width: 768px) {
+      .about {
+        padding: 100px 40px;
+      }
+      .about-text {
+        font-size: 1rem;
+      }
+    }
+
     /* Contact Section */
     .contact {
       padding: 150px 80px;
-      background: #0a0a0a;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1f3a 50%, #0a0a0a 100%);
       color: #fff;
+      position: relative;
+      z-index: 2;
     }
 
     .contact-title {
@@ -338,11 +462,13 @@
       font-weight: 900;
       margin-bottom: 60px;
       letter-spacing: -1px;
+      text-align: center;
     }
 
     .contact-form {
       max-width: 900px;
       margin: 0 auto;
+      perspective: 1200px;
     }
 
     .form-row {
@@ -354,13 +480,19 @@
 
     .form-group {
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.4s;
+    }
+
+    .form-group:hover {
+      transform: translateZ(10px);
     }
 
     .form-group label {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #999;
+      color: #14b8a6;
       display: block;
       margin-bottom: 15px;
       font-weight: 600;
@@ -369,25 +501,27 @@
     .form-group input,
     .form-group textarea {
       width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #333;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(20, 184, 166, 0.2);
+      border-radius: 8px;
       color: #fff;
       font-size: 1rem;
-      padding: 10px 0;
+      padding: 15px 20px;
       font-family: 'Heebo', sans-serif;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
     }
 
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-bottom-color: #ff4444;
+      border-color: #14b8a6;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
     }
 
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: #555;
+      color: #666;
     }
 
     .form-message {
@@ -395,13 +529,13 @@
     }
 
     .form-message textarea {
-      min-height: 120px;
+      min-height: 150px;
       resize: none;
     }
 
     .submit-btn {
       padding: 16px 45px;
-      background: #ff4444;
+      background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
       color: white;
       border: none;
       border-radius: 50px;
@@ -411,12 +545,30 @@
       transition: all 0.4s;
       text-transform: uppercase;
       letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      transition: left 0.4s;
+      z-index: -1;
+      border-radius: 50px;
     }
 
     .submit-btn:hover {
-      background: #ff2222;
       transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(255, 68, 68, 0.3);
+      box-shadow: 0 15px 40px rgba(20, 184, 166, 0.3);
+    }
+
+    .submit-btn:hover::before {
+      left: 0;
     }
 
     @media (max-width: 768px) {
@@ -436,12 +588,14 @@
     footer {
       padding: 60px 80px;
       background: #000;
-      border-top: 1px solid #222;
+      border-top: 1px solid rgba(20, 184, 166, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: #999;
       font-size: 0.9rem;
+      position: relative;
+      z-index: 2;
     }
 
     .footer-content {
@@ -461,13 +615,14 @@
       color: #999;
       text-decoration: none;
       font-size: 0.9rem;
-      transition: color 0.3s;
+      transition: all 0.3s;
       display: block;
       margin-bottom: 10px;
     }
 
     .footer-section a:hover {
-      color: #ff4444;
+      color: #14b8a6;
+      transform: translateX(5px);
     }
 
     @media (max-width: 768px) {
@@ -489,18 +644,18 @@
   <nav>
     <div class="logo">BoostUp</div>
     <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
+      <a href="#services">שירותים</a>
+      <a href="#about">קצת עלינו</a>
+      <a href="#testimonials">עדויות</a>
+      <a href="#contact">צרו קשר</a>
     </div>
-    <button class="contact-btn">Contact Me</button>
+    <button class="contact-btn">צור קשר</button>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-tag">Digital Marketing Agency</div>
+      <div class="hero-tag">סוכנת דיגיטל מרקטינג</div>
       <h1>
         <span class="hero-line-1">הגדל את</span>
         <span class="hero-line-2">העסק שלך</span>
@@ -508,11 +663,14 @@
       <p>BoostUp היא סוכנות דיגיטל מרקטינג שמתמחה בהצמיח עסקים בישראל בקמפיינים ממומנים, תוכן איכותי ו-SEO מקצועי.</p>
       <button class="cta-button">התחל קמפיין</button>
     </div>
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/400x500/14b8a6/ffffff?text=אלירן" alt="Profile">
+    </div>
   </section>
 
   <!-- Services Section -->
   <section id="services" class="services">
-    <h2 class="section-title">מה אנחנו עושים</h2>
+    <h2 class="section-title">שירותים</h2>
     <div class="services-grid">
       <div class="service-item">
         <div class="service-number">01</div>
@@ -548,12 +706,22 @@
     </div>
   </section>
 
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="about-content">
+      <h2 class="section-title">קצת עלינו</h2>
+      <p class="about-text">
+        BoostUp הוקמה על ידי <span class="about-highlight">אלירן סרוגו</span>, בעל ניסיון יותר מ-10 שנים בשיווק דיגיטלי בישראל. אנחנו מתמחים בהצמיח עסקים בעזרת קמפיינים ממומנים, תוכן איכותי ו-SEO מקצועי. הגישה שלנו היא מעשית, מבוססת נתונים וממוקדת בתוצאות אמיתיות.
+      </p>
+    </div>
+  </section>
+
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="testimonial-quote">"</div>
-    <p class="testimonial-text">BoostUp helped us grow our business exponentially. The team is professional, creative, and results-driven.</p>
-    <div class="testimonial-author">David Cohen</div>
-    <div class="testimonial-role">CEO, Tech Startup</div>
+    <p class="testimonial-text">BoostUp עזרו לנו להגדיל את העסק שלנו בצורה משמעותית. הצוות הוא מקצועי, יצירתי ומתמקד בתוצאות.</p>
+    <div class="testimonial-author">דוד כהן</div>
+    <div class="testimonial-role">מנכ"ל, סטארטאפ טק</div>
     <div class="testimonial-dots">
       <div class="dot active"></div>
       <div class="dot"></div>
@@ -565,23 +733,23 @@
 
   <!-- Contact Section -->
   <section id="contact" class="contact">
-    <h2 class="contact-title">בואו נדבר</h2>
+    <h2 class="contact-title">צרו קשר</h2>
     <form class="contact-form">
       <div class="form-row">
         <div class="form-group">
-          <label>Name</label>
-          <input type="text" placeholder="Your name" required>
+          <label>שם</label>
+          <input type="text" placeholder="שם מלא" required>
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label>אימייל</label>
           <input type="email" placeholder="your@email.com" required>
         </div>
       </div>
       <div class="form-group form-message">
-        <label>Message</label>
-        <textarea placeholder="Tell me about your project..." required></textarea>
+        <label>הודעה</label>
+        <textarea placeholder="ספר לנו על הפרויקט שלך..." required></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send Message</button>
+      <button type="submit" class="submit-btn">שלח הודעה</button>
     </form>
   </section>
 
@@ -590,18 +758,18 @@
     <div>© 2026 BoostUp. כל הזכויות שמורות.</div>
     <div class="footer-content">
       <div class="footer-section">
-        <h4>Index</h4>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <h4>תפריט</h4>
+        <a href="#services">שירותים</a>
+        <a href="#about">קצת עלינו</a>
+        <a href="#contact">צרו קשר</a>
       </div>
       <div class="footer-section">
-        <h4>Contact</h4>
+        <h4>יצירת קשר</h4>
         <a href="tel:+972123456789">+972 (0) 123-456789</a>
         <a href="mailto:hello@boostup.co.il">hello@boostup.co.il</a>
       </div>
       <div class="footer-section">
-        <h4>Socials</h4>
+        <h4>סוציאל</h4>
         <a href="#">LinkedIn</a>
         <a href="#">Instagram</a>
       </div>
